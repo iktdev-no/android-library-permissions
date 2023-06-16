@@ -1,5 +1,6 @@
 package no.iktdev.permission
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -11,6 +12,7 @@ abstract class PermissionGroup(context: Context): Pem(context) {
     abstract fun permissions(): List<String>
     open var isRequired: Boolean = false
 
+    @SuppressLint("MissingPermission")
     fun isAllPermitted(): Boolean {
         val permitted = permissions().map { super.isPermitted(it) }
         return permitted.none { !it }
